@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-2"> Filter By </div>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" [(ngModel)]="listFilter">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <h4> Filtered By: {{filterText}}  </h4>
+      </div>
+    </div>
+
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th>
+            <button (click)="showImage()" class="btn btn-primary">
+                {{ imageVisible ? 'Hide' : 'Show'}} Image 
+            </button>            
+          </th>
+          <th>Coures</th>
+          <th>Code </th>
+          <th>Starting Date</th>
+          <th>Price </th>
+          <th> 5 Star Rating</th>
+        </thead>
+
+        <tbody *ngIf="filteredCourses && filteredCourses.length">
+          <tr *ngFor="let course of filteredCourses">
+            <td>
+              <img *ngIf="imageVisible"
+                   [src]="course.imageUrl" 
+                   [alt]="course.courseName"
+                   [style.width.px]="imageWidth"
+                   [style.height.px]="imageWidth" />
+            </td>
+            <td>{{course.courseName}}</td>
+            <td>{{course.courseCode}}</td>
+            <td>{{course.nextBatchDate}}</td>
+            <td>{{course.price | currency: "INR" : "symbol" : '4.2-2'}}</td>
+            <td>{{course.starRating}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+  </div>
+
+  </div>
+</div>
+
